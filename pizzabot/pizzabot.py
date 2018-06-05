@@ -1,34 +1,33 @@
 from lib.point import Point
 from lib.instruction import Instruction
 
+
 class PizzaBot(Instruction):
     def __init__(self):
         super(PizzaBot, self).__init__()
         self.origin = Point((0, 0))
 
-    def _horizontal_movement(self, movement:list, x_destination):
-        if self.origin.x < x_destination:
-            move = x_destination - self.origin.x
+    def _horizontal_movement(self, movement: list, x_destination):
+        move = x_destination - self.origin.x
+        if move > 0:
             movement.append('E'*move)
-        elif self.origin.x > x_destination:
-            move = self.origin.x - x_destination
-            movement.append('W'*move)
+        elif move < 0:
+            movement.append('W'*abs(move))
         else:
             pass
 
         self.origin.x = x_destination
 
-    def _vertical_movement(self, movement:list, y_destination):
-        if self.origin.y < y_destination:
-            move = y_destination - self.origin.y
+    def _vertical_movement(self, movement: list, y_destination):
+        move = y_destination - self.origin.y
+        if move > 0:
             movement.append('N'*move)
-        elif self.origin.y > y_destination:
-            move = self.origin.y - y_destination
-            movement.append('S'*move)
+        elif move < 0:
+            movement.append('S'*abs(move))
         else:
             pass
 
-        self.y_origin = y_destination
+        self.origin.y = y_destination
 
     def deliver_pizza(self):
         dim = Point(self.zone)
@@ -45,4 +44,4 @@ class PizzaBot(Instruction):
 
 
 if __name__ == '__main__':
-     PizzaBot().deliver_pizza()
+    PizzaBot().deliver_pizza()
