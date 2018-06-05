@@ -10,6 +10,9 @@ args = parser.parse_args()
 
 coordinate_pattern = r'(\([0-9]\,\s[0-9]\))'
 command_ls = re.findall(coordinate_pattern, args.delivery_command)
+if not command_ls:
+    sys.exit("Please provide delivery direction in '(#, #)' format")
+
 command_ls = list(map(literal_eval, command_ls))
 
 dimension_pattern = r'([0-9])x([0-9])'
