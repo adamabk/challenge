@@ -15,6 +15,7 @@ class Instruction(object):
         command_pattern = r'((([\d+])x([\d+])(\s\([\d+]\,\s[\d+]\))*))'
         zn = re.match(command_pattern, args.command)
         assert zn is not None, "Please provide command in '#x# (#, #) (#, #)...' format"
+        assert zn.group(5) is not None, "Please provide drop zone in '(#, #) ...' format"
 
         coordinate_pattern = r'\(([\d+])\,\s([\d+])\)'
         ls = re.findall(coordinate_pattern, zn.group(1))

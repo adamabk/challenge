@@ -1,30 +1,23 @@
-import sys
 import unittest
-from io import StringIO
-from unittest import mock
-from pizzabot import PizzaBot
+from lib.bot import PizzaBot
 
 
 class Test_PizzaBot(unittest.TestCase):
-    def setUp(self):
-        self.held, sys.stdout = sys.stdout, StringIO()
-
-    def mock_arg_parser(self):
-        return '5x5 (1, 0) (0, 1) (0, 1)'
-
-    def incorrect_arg_parser(self):
-        return '5x5 (6, 0)'
-
-    @mock.patch.object(PizzaBot, "_parser_helper", mock_arg_parser)
     def test_deliver_pizza(self):
-        PizzaBot().deliver_pizza()
-        exp_res = sys.stdout.getvalue()
-        self.assertEqual(exp_res, 'EDWNDD\n')
+        exp_res = 'ENNNDEEEND'
+        test_res = PizzaBot(zone=(5, 5), drops=[(1, 3), (4, 4)]).deliver_pizza()
+        self.assertEqual(exp_res, test_res)
 
-    @mock.patch.object(PizzaBot, "_parser_helper", incorrect_arg_parser)
     def test_error_deliver_pizza(self):
-        bot = PizzaBot()
+        bot = PizzaBot(zone=(4, 4), drops=[(5, 4)])
         self.assertRaises(AssertionError, bot.deliver_pizza)
+
+    def test_solution(self):
+        exp_res = 'DENNNDEEENDSSDDWWWWSDEEENDWNDEESSD'
+        bot = PizzaBot(
+                zone=(5, 5),
+                drops=[(0, 0), (1, 3), (4, 4), (4, 2), (4, 2), (0, 1), (3, 2), (2, 3), (4, 1)])
+        self.assertEqual(exp_res, bot.deliver_pizza())
 
 
 if __name__ == '__main__':
