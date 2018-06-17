@@ -1,14 +1,8 @@
 # PizzaBot
 
 ## Running the Script
-To run the `pizza_bot_script.py` use:
-
-``` Python
-python3 pizzabot_scripty.py '5x5 (3, 5), (5, 3)'
-```
-The Dimension and the coordinates can be changed depending on the needs.
-
 To run the `pizzabot.py` use:
+
 ### Set Up
 ```
 >>> cd pizzabot/
