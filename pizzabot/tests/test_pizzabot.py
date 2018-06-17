@@ -12,6 +12,11 @@ class Test_PizzaBot(unittest.TestCase):
         bot = PizzaBot(zone=(4, 4), drops=[(5, 4)])
         self.assertRaises(AssertionError, bot.deliver_pizza)
 
+    def test_no_movement(self):
+        exp_res = 'DENDDD'
+        bot = PizzaBot(zone=(4, 4), drops=[(0, 0), (1, 1), (1, 1), (1, 1)])
+        self.assertEqual(exp_res, bot.deliver_pizza())
+
     def test_solution(self):
         exp_res = 'DENNNDEEENDSSDDWWWWSDEEENDWNDEESSD'
         bot = PizzaBot(
