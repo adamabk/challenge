@@ -26,14 +26,14 @@ class PizzaBot(object):
         return moves
 
     def deliver_pizza(self):
-        movement = list()
+        self.movement = list()
         for drop in self.drops:
             assert drop.x <= self.zone.x, "Horizontal movement beyond horizontal dimension is not allowed"
             assert drop.y <= self.zone.y, "vertical movement beyond vertical dimension is not allowed"
             h_move = self._horizontal_movement(x_destination=drop.x)
             v_move = self._vertical_movement(y_destination=drop.y)
-            movement.append(h_move + v_move + 'D')
+            self.movement.append(h_move + v_move + 'D')
 
             self.origin = drop
 
-        return ''.join(movement)
+        return ''.join(self.movement)
