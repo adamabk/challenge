@@ -18,6 +18,6 @@ There is an assertion made to follow exactly the pattern as written in the direc
 ### Running the Unittest
 To run the unittest for `pizzabot.py`.
 ```
->>> python3 unittest -m tests/test_pizzabot.py
->>> python3 unittest -m tests/test_instruction.py
+>>> python3 -m unittest tests/test_pizzabot.py
+>>> python3 -m unittest tests/test_instruction.py
 ```
