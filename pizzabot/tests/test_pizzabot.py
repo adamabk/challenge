@@ -8,8 +8,12 @@ class Test_PizzaBot(unittest.TestCase):
         test_res = PizzaBot(zone=(5, 5), drops=[(1, 3), (4, 4)]).deliver_pizza()
         self.assertEqual(exp_res, test_res)
 
-    def test_error_deliver_pizza(self):
+    def test_h_zone_error(self):
         bot = PizzaBot(zone=(4, 4), drops=[(5, 4)])
+        self.assertRaises(AssertionError, bot.deliver_pizza)
+
+    def test_v_zone_error(self):
+        bot = PizzaBot(zone=(4, 4), drops=[(4, 5)])
         self.assertRaises(AssertionError, bot.deliver_pizza)
 
     def test_no_movement(self):
